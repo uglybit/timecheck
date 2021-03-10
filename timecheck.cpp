@@ -42,6 +42,10 @@ int main(int argc, char** argv) {
   fileOut = "./" + fileOut;
   cout << "Executing time: " << measureTime(fileOut).count() << " microseconds\n";
 
+  // remove executable file
+  string removeFile = "rm " + fileOut;
+  system(removeFile.c_str());
+
   return 0;
 }
 
