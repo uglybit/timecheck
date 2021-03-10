@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
   cout << "File to check: " << fileName << '\n';
 
   // checking if it is '*.cpp' file
-  size_t commaPosition = fileName.find('.');
+  size_t commaPosition = fileName.find_last_of('.');
   string extension;
   if (commaPosition == string::npos || fileName.substr(commaPosition) != ".cpp") {
     cout << "Inappropriate file type. Exiting..\n";
