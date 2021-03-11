@@ -28,22 +28,36 @@ int main(int argc, char** argv) {
     exit(2);
   }
 
-  // cut extension from file name
+  // cut extension from file name 
+#ifdef linux
   string fileOut = fileName.erase(commaPosition) + ".out";
+#else 
+  string fileOut = fileName.erase(commaPosition) + ".exe";
+#endif
 
   // build code for compiling file
-  string path = "g++ ./";
+  string path = "g++ ";
   path += argv[1];
   path += " -o ";
   path += fileOut;
   cout << "Compiling time: " << measureTime(path).count() << " microseconds\n";
 
   // build code for execution
+#ifdef linux 
   fileOut = "./" + fileOut;
+#else  
+  fileOut = ".\\" + fileOut;
+#endif
+  
   cout << "Executing time: " << measureTime(fileOut).count() << " microseconds\n";
 
   // remove executable file
+#ifdef linux 
   string removeFile = "rm " + fileOut;
+#else 
+  string removeFile = "del /f " + fileOut;
+#endif
+
   system(removeFile.c_str());
 
   return 0;
